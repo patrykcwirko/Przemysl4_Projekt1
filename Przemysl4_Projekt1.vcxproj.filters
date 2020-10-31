@@ -21,20 +21,17 @@
     <ClCompile Include="Problem.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Car.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Problem.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Car.h">
+    <ClInclude Include="City.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Users\Patryk\Desktop\PL.csv">
+    <None Include="PL.csv">
       <Filter>Pliki zasobów</Filter>
     </None>
   </ItemGroup>

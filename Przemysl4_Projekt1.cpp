@@ -2,13 +2,19 @@
 //
 
 #include <iostream>
+#include <sstream>
+#include <string>
 #include "Problem.h"
+
+using namespace std;
 
 int main()
 {
-    Problem problem( "PL.csv" );
+    Problem problem( "PL.csv", 0);
+    problem.maxTrace();
 
-    std::cout << problem.getCityCount() <<"Hello World!\n";
+    std::cout << problem.getPerm()[2].id <<" Hello World!\n";
+    //std::cout << problem.getTab()[0][24] <<" Hello World!\n";
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania

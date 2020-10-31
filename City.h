@@ -1,8 +1,12 @@
 #pragma once
 #include <string>
+#include <vector>
 
-struct Car
+using namespace std;
+
+struct City
 {
+	int id;
 	string code;
 	string name;
 	long lat;

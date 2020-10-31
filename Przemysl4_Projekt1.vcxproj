@@ -147,16 +147,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Car.cpp" />
     <ClCompile Include="Problem.cpp" />
     <ClCompile Include="Przemysl4_Projekt1.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Car.h" />
+    <ClInclude Include="City.h" />
     <ClInclude Include="Problem.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Users\Patryk\Desktop\PL.csv" />
+    <None Include="PL.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,26 +1,34 @@
 #pragma once
-#include "Car.h"
+#include "City.h"
 #include <vector>
 #include <fstream>
 #include <string>
 
-#define CARS_COUNT 6
+#define JOB_LIMIT 3
 
 using namespace std;
 
 class Problem
 {
-	vector<vector<int>> tab;
+	vector<vector<double>> tab;
 	string unit;
 	int city_count;
-	vector<Car> cars;
+	vector<City> citis;
+	int cars;
+	vector<City> perm;
+	City centMag;
+
+	int FindCity(vector<City> tmp, int ider);
 
 	public:
-		Problem( string file );
-		vector<vector<int>> getTab() { return tab; }
-		string geyUnit() { return unit; }
+		Problem(string file, int cent_mag);
+		vector<vector<double>> getTab() { return tab; }
+		string getUnit() { return unit; }
 		int getCityCount() { return city_count; }
-		vector<Car> getCars() { return cars; }
+		vector<City> getCity() { return citis; }
+		vector<City> getPerm() { return perm; }
+		void maxTrace();
+		void printTrace();
 
 
 };
