@@ -5,6 +5,7 @@
 #include <string>
 
 #define JOB_LIMIT 3
+#define MAX_SEARCH_VALUE 10000000000
 
 using namespace std;
 
@@ -29,6 +30,7 @@ class Problem
 		vector<City> getPerm() { return perm; }
 		void maxTrace();
 		void printTrace();
+		int TraceKm();
 
 
 };

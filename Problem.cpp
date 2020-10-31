@@ -92,24 +92,29 @@ void Problem::maxTrace()
     City mag;
     //int newI = 0, newL = 0;
     City newI, newL;
-    int tir = 1, tmpLng = 0, taskCount;
+    int tir = 1, tmpLng = 0, tmpIng = 0, taskCount;
     bool limit = true;
 
     perm.clear();
     cars = 0;
+    tmp.erase(tmp.begin() + FindCity(tmp, centMag.id));
+
 
     while (tmp.size() != 0 )
     {
-        taskCount = 0;
+        taskCount = 1;
         perm.push_back(centMag);
         limit = true;
 
+        cout << "--------------" << endl;
+
+        tmpIng = 0;
         for (City i : tmp)
         {
-            cout << "tt " << centMag.id << " kk " << i.id << endl;
-            if (tmpLng < tab[centMag.id][i.id]) {
-                cout << "fkoakfoa " << tmpLng << "fafaga " << tab[centMag.id][i.id] << endl;
-                tmpLng = tab[centMag.id][i.id];
+            cout << tab[centMag.id][i.id] << " kk " << tmpIng << " lll " << i.id << endl;
+            if (tmpIng < tab[centMag.id][i.id]) {
+                cout << "fkoakfoa " << tmpIng << "fafaga " << tab[centMag.id][i.id] << endl;
+                tmpIng = tab[centMag.id][i.id];
                 newI = i;
             }
         }
@@ -124,7 +129,7 @@ void Problem::maxTrace()
                 newI = i;
             }
         }*/
-        cout << "_-_-_-_-_-_-_--_III " << newI.id  << "   "  << FindCity(tmp, newI.id) << endl;
+        cout << "_-_-_-_-_-_-_--_III " << newI.id  << endl;
         perm.push_back(newI);
         //FindCity(newI.id);
         tmp.erase(tmp.begin() + FindCity(tmp, newI.id));
@@ -135,7 +140,7 @@ void Problem::maxTrace()
         while (limit && tmp.size() != 0)
         {
             cout << "--------------" << tmp.size() << endl;
-            tmpLng = 100000000000000;
+            tmpLng = MAX_SEARCH_VALUE;
             for (City j : tmp)
             {
                 cout << tab[newI.id][j.id] << " fafa " << j.id << endl;
@@ -146,7 +151,7 @@ void Problem::maxTrace()
             }
             if (taskCount + 1 <= JOB_LIMIT)
             {
-                cout << "--------------LLL" << newL.id << "  " << FindCity(tmp, newL.id) << endl;
+                cout << "--------------LLL" << newL.id << endl;
                 perm.push_back(newL);
                 tmp.erase(tmp.begin() + FindCity(tmp, newL.id));
                 taskCount++;
@@ -163,6 +168,25 @@ void Problem::maxTrace()
 
 void Problem::printTrace()
 {
+    for ( City i : perm)
+    {
+        if (i.id == centMag.id)
+        {
+            cout << endl;
+        }
+        cout << i.id << "->";
+    }
+}
+
+int Problem::TraceKm()
+{
+    int traceKm = 0;
+
+    for (int i = 1; i < perm.size() - 1; i++)
+    {
+            traceKm += tab[perm[i - 1].id][perm[i].id];
+    }
+    return traceKm;
 }
 
 int Problem::FindCity(vector<City> tmp, int ider)

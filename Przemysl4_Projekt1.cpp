@@ -13,7 +13,9 @@ int main()
     Problem problem( "PL.csv", 0);
     problem.maxTrace();
 
-    std::cout << problem.getPerm()[2].id <<" Hello World!\n";
+    cout << problem.getPerm()[2].id <<"\n";
+    problem.printTrace();
+    cout << endl << "przejechana trasa: " << problem.TraceKm() << endl;
     //std::cout << problem.getTab()[0][24] <<" Hello World!\n";
 }
 
