@@ -1,9 +1,43 @@
 ﻿#include "Problem.h"
 #include <iostream>
 
-Problem::Problem(string file, int cent_mag)
+Problem::Problem()
+: city_count(0)
+, cars(0)
+, unit("")
+, centMag()
 {
+}
 
+Problem& Problem::operator=(const Problem& s)
+{
+    tab = s.tab;
+    unit = s.unit;
+    city_count = s.city_count;
+    citis = s.citis;
+    cars = s.cars;
+    perm = s.perm;
+    centMag = s.centMag;
+    return *this;
+}
+
+Problem::Problem(const Problem& problems)
+{
+    tab = problems.tab;
+    unit = problems.unit;
+    city_count = problems.city_count;
+    citis = problems.citis;
+    cars = problems.cars;
+    perm = problems.perm;
+    centMag = problems.centMag;
+}
+
+Problem::Problem(string file, int cent_mag)
+    : city_count(0)
+    , cars(0)
+    , unit("")
+    , centMag()
+{
     ifstream  data( file );
     int licznik = 0;
     string line, smietnik;
@@ -11,6 +45,8 @@ Problem::Problem(string file, int cent_mag)
     string delimiter = ";";
     size_t start, end;
     string token;
+    city_count = 0;
+    cars = 0;
 
     if (!data.eof() )
     {
@@ -22,7 +58,6 @@ Problem::Problem(string file, int cent_mag)
         getline(data, line, '\n');
         end = line.find(delimiter);
         token = line.substr(0, end);
-        cout << token << endl;
         unit = token;
 
         int i = 0;
@@ -35,12 +70,11 @@ Problem::Problem(string file, int cent_mag)
             for (int j = 0; j < city_count; j++)
             {
                 token = line.substr(start, end - start);
-                tab[i].push_back(atoi(token.c_str()));
+                tab[i].push_back(atof(token.c_str()));
                 start = end + delimiter.length();
                 end = line.find(delimiter, start);
             }
         }
-        cout << i << endl;
     }
 
     int j = 0;
@@ -82,8 +116,6 @@ Problem::Problem(string file, int cent_mag)
             centMag = tmp_car;
         }
     }
-    cout << "." << endl;
-
 }
 
 void Problem::maxTrace()
@@ -106,44 +138,24 @@ void Problem::maxTrace()
         perm.push_back(centMag);
         limit = true;
 
-        cout << "--------------" << endl;
-
         tmpIng = 0;
         for (City i : tmp)
         {
-            cout << tab[centMag.id][i.id] << " kk " << tmpIng << " lll " << i.id << endl;
             if (tmpIng < tab[centMag.id][i.id]) {
-                cout << "fkoakfoa " << tmpIng << "fafaga " << tab[centMag.id][i.id] << endl;
                 tmpIng = tab[centMag.id][i.id];
                 newI = i;
             }
         }
-        /*
-        for (int i = 0; i < tmp.size(); i++)
-        {
-            cout << tab.size() << endl;
-            cout << "tt " << centMag.id << "kk " << i << endl;
-            if (tmpLng < tab[centMag.id][tmp[i].id]) {
-                cout << "fkoakfoa " << tmpLng << "fafaga " << tab[centMag.id][tmp[i].id] << endl;
-                tmpLng = tab[centMag.id][tmp[i].id];
-                newI = i;
-            }
-        }*/
-        cout << "_-_-_-_-_-_-_--_III " << newI.id  << endl;
+
         perm.push_back(newI);
-        //FindCity(newI.id);
         tmp.erase(tmp.begin() + FindCity(tmp, newI.id));
-        
-        cout << "test remove" << endl;    
 
         taskCount = 1;
         while (limit && tmp.size() != 0)
         {
-            cout << "--------------" << tmp.size() << endl;
             tmpLng = MAX_SEARCH_VALUE;
             for (City j : tmp)
             {
-                cout << tab[newI.id][j.id] << " fafa " << j.id << endl;
                 if (tmpLng > tab[newI.id][j.id]) {
                     tmpLng = tab[newI.id][j.id];
                     newL = j;
@@ -151,7 +163,6 @@ void Problem::maxTrace()
             }
             if (taskCount + 1 <= JOB_LIMIT)
             {
-                cout << "--------------LLL" << newL.id << endl;
                 perm.push_back(newL);
                 tmp.erase(tmp.begin() + FindCity(tmp, newL.id));
                 taskCount++;
@@ -176,6 +187,18 @@ void Problem::printTrace()
         }
         cout << i.id << "->";
     }
+}
+
+void Problem::printShortTrace()
+{
+    for (int i = 0; i < perm.size() - 1; i++)
+    {
+        if (i >= 0 )
+        {
+            cout << perm[i].id << "->";
+        }
+    }
+        cout << endl;
 }
 
 int Problem::TraceKm()

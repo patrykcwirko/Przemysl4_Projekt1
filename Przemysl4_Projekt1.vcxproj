@@ -149,10 +149,12 @@
   <ItemGroup>
     <ClCompile Include="Problem.cpp" />
     <ClCompile Include="Przemysl4_Projekt1.cpp" />
+    <ClCompile Include="SA_Algotythm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="City.h" />
     <ClInclude Include="Problem.h" />
+    <ClInclude Include="SA_Algotythm.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PL.csv" />

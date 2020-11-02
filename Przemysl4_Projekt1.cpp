@@ -5,17 +5,36 @@
 #include <sstream>
 #include <string>
 #include "Problem.h"
+#include "SA_Algotythm.h"
 
 using namespace std;
 
 int main()
 {
-    Problem problem( "PL.csv", 0);
-    problem.maxTrace();
+    int BestCityIndex, BestCityKm = 100000, CityKm = 0;
+    Problem problem1( "PL.csv", 10);
+    SA_Algotythm algor;
+    //problem.maxTrace();
+    //problem.printTrace();
 
-    cout << problem.getPerm()[2].id <<"\n";
-    problem.printTrace();
-    cout << endl << "przejechana trasa: " << problem.TraceKm() << endl;
+    problem1.maxTrace();
+    for (size_t i = 0; i < 25; i++)
+    {
+        Problem problem("PL.csv", i);
+        problem.maxTrace();
+        CityKm = problem.TraceKm();
+        if (CityKm < BestCityKm)
+        {
+            BestCityKm = CityKm;
+            BestCityIndex = i;
+        }
+        cout << "przejechana trasa dla magacynu centralnego w "<< problem.getCity()[i].code << ": " << CityKm << endl;
+    }
+    cout << endl << "Najlepiej ustawić magazyn centralny w " << problem1.getCity()[BestCityIndex].code << endl;
+    cout << endl << endl;
+    problem1 = algor.SaAlg(problem1);
+    cout << endl << "najlepsza trana dla " << problem1.getCity()[10].code << " ma długość " << problem1.TraceKm() << endl;
+
     //std::cout << problem.getTab()[0][24] <<" Hello World!\n";
 }
 
