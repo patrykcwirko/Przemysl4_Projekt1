@@ -27,13 +27,30 @@ int main()
         {
             BestCityKm = CityKm;
             BestCityIndex = i;
+            problem1 = problem;
         }
         cout << "przejechana trasa dla magacynu centralnego w "<< problem.getCity()[i].code << ": " << CityKm << endl;
     }
-    cout << endl << "Najlepiej ustawić magazyn centralny w " << problem1.getCity()[BestCityIndex].code << endl;
+    cout << endl << " Wedłóg VRP najlepiej ustawić magazyn centralny w " << problem1.getCity()[BestCityIndex].code << " : " << CityKm << "km" << endl;
     cout << endl << endl;
-    problem1 = algor.SaAlg(problem1);
-    cout << endl << "najlepsza trana dla " << problem1.getCity()[10].code << " ma długość " << problem1.TraceKm() << endl;
+    cout << "Symulowanie wyrzażanie -------------------------------" << endl;
+
+    for (size_t i = 0; i < 25; i++)
+    {
+        Problem problem("PL.csv", i);
+        problem.maxTrace();
+        problem = algor.SaAlg(problem);
+        CityKm = problem.TraceKm();
+        if (CityKm < BestCityKm)
+        {
+            BestCityKm = CityKm;
+            BestCityIndex = i;
+            problem1 = problem;
+        }
+        cout << "przejechana trasa dla magacynu centralnego w " << problem.getCity()[i].code << ": " << CityKm << endl;
+    }
+    cout << endl << " Wedłóg symulowanego wyrzażania  najlepiej ustawić magazyn centralny w " << problem1.getCity()[BestCityIndex].code << " : " << CityKm << "km" << endl;
+    cout << endl << endl;
 
     //std::cout << problem.getTab()[0][24] <<" Hello World!\n";
 }
